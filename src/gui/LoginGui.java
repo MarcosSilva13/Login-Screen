@@ -6,13 +6,16 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Point;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
- * @author marco
+ * @author marcos
  */
 public class LoginGui extends javax.swing.JFrame {
-
+    private Point point = new Point();
     /**
      * Creates new form LoginGui
      */
@@ -35,13 +38,25 @@ public class LoginGui extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnLogar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField1 = new gui.JTextFieldHint(new JTextField(),"user-icon", "Nome de Usuário");
+        ;
+        jTextField2 = new JPassWordFieldHint(new JPasswordField(), "padlock", "Senha")
+        ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 410));
         setUndecorated(true);
         setSize(new java.awt.Dimension(400, 410));
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(27, 187, 125));
 
@@ -108,9 +123,11 @@ public class LoginGui extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,6 +208,16 @@ public class LoginGui extends javax.swing.JFrame {
         btnSair.setBackground(new Color(217, 81, 51));
         btnSair.setForeground(Color.WHITE);
     }//GEN-LAST:event_btnSairMouseExited
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        point.x = evt.getX();
+        point.y = evt.getY();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        Point p = this.getLocation();
+        this.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
+    }//GEN-LAST:event_formMouseDragged
 
     /**
      * @param args the command line arguments
